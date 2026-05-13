@@ -5,20 +5,68 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
+
+            <!-- Pestaña personalizada para datos escolares -->
             <xpath expr="//sheet/notebook" position="inside">
                 <page string="Datos escolares">
+
                     <group>
-                        <group string="Clasificación">
+                        <group string="Clasificación escolar">
                             <field name="tipo_contacto_escolar"/>
-                            <field name="grado_escolar"/>
-                        </group>
-                        <group string="Apoderados">
-                            <field name="apoderado_principal_id"/>
-                            <field name="apoderado_secundario_id"/>
                         </group>
                     </group>
+
+                    <!-- Campos para estudiantes -->
+                    <group string="Datos del estudiante" invisible="tipo_contacto_escolar != 'estudiante'">
+                        <field name="grado_escolar"/>
+                        <field name="apoderado_principal_id"/>
+                        <field name="apoderado_secundario_id"/>
+                    </group>
+
+                    <!-- Campos para apoderados -->
+                    <group string="Relación con estudiantes" invisible="tipo_contacto_escolar != 'apoderado'">
+                        <field name="cantidad_estudiantes_relacionados" readonly="1"/>
+
+                        <field name="estudiante_principal_ids" readonly="1">
+                            <list string="Estudiantes como apoderado principal">
+                                <field name="name"/>
+                                <field name="grado_escolar"/>
+                            </list>
+                        </field>
+
+                        <field name="estudiante_secundario_ids" readonly="1">
+                            <list string="Estudiantes como apoderado secundario">
+                                <field name="name"/>
+                                <field name="grado_escolar"/>
+                            </list>
+                        </field>
+                    </group>
+
+                    <!-- Campos para personal -->
+                    <group string="Datos del personal" invisible="tipo_contacto_escolar != 'personal'">
+                        <label string="Contacto del personal institucional. Los permisos reales se gestionan desde Usuarios."/>
+                    </group>
+
                 </page>
             </xpath>
+
+            <!-- Ocultar campos comerciales no necesarios -->
+            <xpath expr="//field[@name='parent_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='website']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
         </field>
     </record>
 </odoo>

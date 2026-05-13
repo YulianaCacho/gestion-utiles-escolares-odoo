@@ -1,6 +1,6 @@
 {
     "name": "Gestión de Útiles Escolares",
-    "version": "1.0",
+    "version": "1.1",
     "summary": "Adaptación de Odoo para la gestión de útiles escolares",
     "description": "Campos personalizados para estudiantes, apoderados, productos y recepciones de útiles escolares.",
     "author": "Equipo Taller Integrador I",
@@ -12,6 +12,6 @@
         "views/stock_picking_views.xml"
     ],
     "installable": True,
-    "application": False,
+    "application": True,
     "license": "LGPL-3"
 }

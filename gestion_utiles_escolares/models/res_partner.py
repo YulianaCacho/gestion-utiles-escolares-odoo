@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import api, models, fields
 
 
 class ResPartner(models.Model):
@@ -40,3 +40,27 @@ class ResPartner(models.Model):
         string="Apoderado secundario",
         domain="[('tipo_contacto_escolar', '=', 'apoderado')]"
     )
+
+    estudiante_principal_ids = fields.One2many(
+        "res.partner",
+        "apoderado_principal_id",
+        string="Estudiantes relacionados como apoderado principal"
+    )
+
+    estudiante_secundario_ids = fields.One2many(
+        "res.partner",
+        "apoderado_secundario_id",
+        string="Estudiantes relacionados como apoderado secundario"
+    )
+
+    cantidad_estudiantes_relacionados = fields.Integer(
+        string="Cantidad de estudiantes relacionados",
+        compute="_compute_cantidad_estudiantes_relacionados",
+        store=False
+    )
+
+    @api.depends("estudiante_principal_ids", "estudiante_secundario_ids")
+    def _compute_cantidad_estudiantes_relacionados(self):
+        for partner in self:
+            estudiantes = partner.estudiante_principal_ids | partner.estudiante_secundario_ids
+            partner.cantidad_estudiantes_relacionados = len(estudiantes)

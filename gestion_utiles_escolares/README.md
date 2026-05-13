@@ -1,27 +1,17 @@
-# Gestión de Útiles Escolares
+# Gestión de Útiles Escolares v1.1
 
-Módulo personalizado para adaptar Odoo al proceso de gestión de útiles escolares de la I.E.P. Genios del Millennium.
+Adaptación de Odoo para la gestión de útiles escolares en la I.E.P. Genios del Millennium.
 
-## Módulos Odoo modificados
+## Cambios principales
+
+- Contactos: clasificación escolar, grado escolar, apoderados y estudiantes relacionados.
+- Apoderados: visualización de estudiantes asociados y cantidad de hijos registrados.
+- Productos: tipo de uso escolar.
+- Inventario: control de recepción, faltantes, regularización y devolución.
+- Contactos: ocultamiento básico de campos comerciales no necesarios.
+
+## Módulos modificados
 
 - Contactos (`res.partner`)
 - Productos (`product.template`)
-- Inventario / Recepciones (`stock.picking`)
-
-## Funcionalidad agregada
-
-- Clasificación de contactos escolares.
-- Grado escolar del estudiante.
-- Relación con apoderado principal y secundario.
-- Tipo de uso escolar del producto.
-- Estudiante y apoderado asociado a una recepción.
-- Estado de entrega de útiles.
-- Observación de faltantes.
-- Marcado de útiles personales verificados y devueltos.
-
-## Evidencia esperada
-
-- Módulo visible e instalado en Odoo.
-- Contacto con pestaña “Datos escolares”.
-- Producto con campo “Tipo de uso escolar”.
-- Recepción con pestaña “Control de útiles escolares”.
+- Inventario (`stock.picking`)
