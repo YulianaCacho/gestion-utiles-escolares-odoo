@@ -9,7 +9,11 @@
     "data": [
         "views/res_partner_views.xml",
         "views/product_template_views.xml",
-        "views/stock_picking_views.xml"
+        "views/stock_picking_views.xml",
+        "views/lista_utiles_views.xml",
+        "security/ir.model.access.csv",
+        'views/recepcion_utiles_views.xml',
+        'reports/reporte_recepcion_utiles.xml',
     ],
     "installable": True,
     "application": True,

@@ -1,8 +1,14 @@
 from odoo import api, models, fields
-
+from odoo.exceptions import ValidationError
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
+
+    dni_escolar = fields.Char(
+        string="DNI",
+        size=8
+    )
+
 
     tipo_contacto_escolar = fields.Selection(
         [
@@ -13,6 +19,21 @@ class ResPartner(models.Model):
         ],
         string="Tipo de contacto escolar"
     )
+
+    cargo_institucional = fields.Selection(
+    [
+        ("ninguno", "Ninguno"),
+        ("promotora", "Promotora"),
+        ("directora", "Directora"),
+        ("secretaria", "Secretaria"),
+        ("coordinadora", "Coordinadora"),
+        ("auxiliar_recepcion", "Auxiliar de recepción"),
+        ("docente", "Docente"),
+        ("otro", "Otro"),
+    ],
+    string="Cargo institucional",
+    default="ninguno"
+)
 
     grado_escolar = fields.Selection(
         [
@@ -64,3 +85,10 @@ class ResPartner(models.Model):
         for partner in self:
             estudiantes = partner.estudiante_principal_ids | partner.estudiante_secundario_ids
             partner.cantidad_estudiantes_relacionados = len(estudiantes)
+
+    @api.constrains("dni_escolar")
+    def _check_dni_escolar(self):
+       for partner in self:
+            if partner.dni_escolar:
+                if not partner.dni_escolar.isdigit() or len(partner.dni_escolar) != 8:
+                   raise ValidationError("El DNI debe contener exactamente 8 números.")
