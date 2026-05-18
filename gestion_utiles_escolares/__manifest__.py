@@ -15,6 +15,11 @@
         'views/recepcion_utiles_views.xml',
         'reports/reporte_recepcion_utiles.xml',
     ],
+   'assets': {
+        'web.assets_backend': [
+            'gestion_utiles_escolares/static/src/css/backend_theme.css',
+        ],
+    },
     "installable": True,
     "application": True,
     "license": "LGPL-3"
